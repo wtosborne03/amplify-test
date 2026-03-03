@@ -1,0 +1,13 @@
+{
+    "name": "process-profile-photo",
+    "version": "1.0.0",
+    "type": "module",
+    "dependencies": {
+        "@aws-sdk/client-s3": "^3.0.0",
+        "jimp": "^0.22.0"
+    },
+    "devDependencies": {
+        "@types/aws-lambda": "^8.10.0",
+        "@types/node": "^20.0.0"
+    }
+}
