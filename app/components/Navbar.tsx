@@ -1,6 +1,6 @@
 "use client";
 
-import { AppBar, Toolbar, Typography, Box, Container } from "@mui/material";
+import { AppBar, Toolbar, Typography, Box, Container, Button } from "@mui/material";
 import AuthButton from "./AuthButton";
 import Link from "next/link";
 
@@ -18,6 +18,13 @@ export default function Navbar() {
                             LinkedOut
                         </Typography>
                     </Link>
+                    <Box sx={{ display: 'flex', gap: 2 }}>
+                        <Link href="/step-functions" passHref legacyBehavior>
+                            <Button color="inherit" component="a">
+                                Step Functions
+                            </Button>
+                        </Link>
+                    </Box>
                     <Box sx={{ flexGrow: 1 }} />
                     <AuthButton />
                 </Toolbar>

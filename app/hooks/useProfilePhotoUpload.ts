@@ -51,8 +51,9 @@ export function useProfilePhotoUpload() {
                 throw new Error(errors[0]?.message || "Failed to upload photo");
             }
 
-            if (result && typeof result === 'object') {
-                const response = result as any;
+            if (result) {
+                // Parse the JSON string response
+                const response = typeof result === 'string' ? JSON.parse(result) : result;
 
                 if (response.success) {
                     return {

@@ -1,0 +1,12 @@
+{
+    "name": "step-function-task",
+    "version": "1.0.0",
+    "type": "module",
+    "dependencies": {
+        "@aws-sdk/client-lambda": "^3.370.0"
+    },
+    "devDependencies": {
+        "@types/aws-lambda": "^8.10.119",
+        "@types/node": "^20.0.0"
+    }
+}
