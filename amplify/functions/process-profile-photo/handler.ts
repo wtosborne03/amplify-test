@@ -11,8 +11,6 @@ export const handler: Schema["uploadProfilePhoto"]["functionHandler"] = async (e
     console.log("Full context: ", JSON.stringify(context, null, 2));
 
     const { image } = event.arguments;
-
-    // In Amplify Gen 2, identity comes from event.identity
     const identity = (event as any).identity;
     const userId = identity?.sub || identity?.claims?.sub || identity?.username;
 
@@ -42,27 +40,22 @@ export const handler: Schema["uploadProfilePhoto"]["functionHandler"] = async (e
     }
 
     try {
-        // Decode base64 image
+        //load with jimp
         const imageBuffer = Buffer.from(image, 'base64');
-
-        // Load image with Jimp
         const jimpImage = await Jimp.read(imageBuffer);
 
-        // Process main image: resize to 400x400
         const processedImage = await jimpImage
             .clone()
             .cover(400, 400)
             .quality(85)
             .getBufferAsync(Jimp.MIME_JPEG);
 
-        // Create thumbnail: 150x150
         const thumbnail = await jimpImage
             .clone()
             .cover(150, 150)
             .quality(80)
             .getBufferAsync(Jimp.MIME_JPEG);
 
-        // Upload main image
         const mainKey = `profile-pictures/${userId}/avatar.jpg`;
         await s3Client.send(
             new PutObjectCommand({
@@ -74,7 +67,6 @@ export const handler: Schema["uploadProfilePhoto"]["functionHandler"] = async (e
         );
         console.log('Uploaded main image:', mainKey);
 
-        // Upload thumbnail
         const thumbnailKey = `profile-pictures/${userId}/thumb-avatar.jpg`;
         await s3Client.send(
             new PutObjectCommand({
